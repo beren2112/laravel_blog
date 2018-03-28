@@ -27,7 +27,7 @@ class UsersRequest extends Request
             'name'=>'required',
             'email'=>'required|unique:users,email',
             'role_id'=>'required',
-            'password'=>'required',
+            'password'=>'required|min:6|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/',
             'is_active'=>'required',
         ];
     }
