@@ -116,18 +116,18 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="/codehacking/public/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Users<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/users">All Users</a>
+                                <a href="/codehacking/public/admin/users">All Users</a>
                             </li>
 
                             <li>
-                                <a href="/users/create">Create User</a>
+                                <a href="/codehacking/public/admin/users/create">Create User</a>
                             </li>
 
                         </ul>
@@ -331,7 +331,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"></h1>
+                <h1 class="page-header">@yield('pageheader')</h1>
 
                 @yield('content')
             </div>
