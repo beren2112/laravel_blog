@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('pageheader')
-    Edit Category
+    Edit Category - {{ $category->name }}
 @endsection
 @section('content')
     @include('includes.form_error')
