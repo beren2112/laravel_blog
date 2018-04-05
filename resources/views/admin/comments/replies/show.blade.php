@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('pageheader')
-    Comments
+    Replies
 @endsection
 @section('content')
     @if(Session::has('deleted_comment'))
@@ -21,24 +21,24 @@
         </tr>
         </thead>
         <tbody>
-        @if($comments)
-            @foreach($comments as $comment)
+        @if($replies)
+            @foreach($replies as $reply)
                 <tr>
-                    <td>{{$comment->id}}</td>
-                    <td>{{$comment->author}}</td>
-                    <td>{{$comment->email}}</td>
-                    <td>{{ str_limit($comment->body, 100, '...') }}</td>
-                    <td><a class="btn btn-primary" href="{{route('home.post',$comment->post->id)}}" data-toggle="tooltip" title="View Post"><i class="fa fa-eye"></i></a></td>
+                    <td>{{$reply->id}}</td>
+                    <td>{{$reply->author}}</td>
+                    <td>{{$reply->email}}</td>
+                    <td>{{ str_limit($reply->body, 100, '...') }}</td>
+                    <td><a class="btn btn-primary" href="{{route('home.post',$reply->comment->post->id)}}" data-toggle="tooltip" title="View Post"><i class="fa fa-eye"></i></a></td>
                     <td>
-                        @if($comment->is_active == 1)
-                            {!! Form::open(['method'=>'PATCH','action'=>['PostCommentsController@update', $comment->id]]) !!}
+                        @if($reply->is_active == 1)
+                            {!! Form::open(['method'=>'PATCH','action'=>['CommentRepliesController@update', $reply->id]]) !!}
                             <input type="hidden" name="is_active" value="0">
                             <div class="form-group">
                                 {!! Form::button('<i class="fa fa-ban"></i>',['type'=>'submit','class'=>'btn btn-info','data-toggle' => 'tooltip' ,'title'=>"Disapprove"]) !!}
                             </div>
                             {!! Form::close() !!}
                         @else
-                            {!! Form::open(['method'=>'PATCH','action'=>['PostCommentsController@update', $comment->id]]) !!}
+                            {!! Form::open(['method'=>'PATCH','action'=>['CommentRepliesController@update', $reply->id]]) !!}
                             <input type="hidden" name="is_active" value="1">
                             <div class="form-group">
                                 {!! Form::button('<i class="fa fa-check-circle"></i>',['type' => 'submit','class'=>'btn btn-success','data-toggle' => 'tooltip' ,'title'=>"Approve"]) !!}
@@ -47,7 +47,7 @@
                         @endif
                     </td>
                     <td>
-                        {!! Form::open(['method'=>'DELETE','action'=>['PostCommentsController@destroy', $comment->id]]) !!}
+                        {!! Form::open(['method'=>'DELETE','action'=>['CommentRepliesController@destroy', $reply->id]]) !!}
                         <div class="form-group">
                             {!! Form::button('<i class="fa fa-trash"></i>',['type'=>'submit','class'=>'btn btn-danger','data-toggle' => 'tooltip' ,'title'=>"Delete"]) !!}
                         </div>
@@ -58,9 +58,4 @@
         @endif
         </tbody>
     </table>
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-5">
-            {{$comments->render()}}
-        </div>
-    </div>
 @endsection
