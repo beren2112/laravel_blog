@@ -96,6 +96,21 @@
                         <small>{{$comment->created_at->diffForHumans()}}</small>
                     </h4>
                     <p>{{$comment->body}}</p>
+                    <div class="comment-reply-container">
+                        <button class="toggle-reply btn btn-primary pull-right">Reply</button>
+                        <div class="comment-reply col-sm-6">
+                            {!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@createReply']) !!}
+                            <div class="form-group">
+                                <input type="hidden" name="comment_id" value="{{$comment->id}}">
+                                {!! Form::label('body', 'Body:') !!}
+                                {!! Form::textarea('body', null, ['class'=>'form-control','rows'=>1])!!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::submit('submit', ['class'=>'btn btn-primary']) !!}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
                 @if(count($comment->replies) > 0)
                     @foreach($comment->replies as $reply)
                         @if($reply->is_active == 1)
@@ -128,10 +143,10 @@
                                     </div>
                                     <!-- End Nested Comment -->
                                 </div>
-                            @else
-                                <h1 class="text-center">No Replies</h1>
                             @endif
                         @endforeach
+                    @else
+                        <h1 class="text-center">No Replies</h1>
                     @endif
                 </div>
             </div>

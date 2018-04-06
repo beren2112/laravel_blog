@@ -30,7 +30,7 @@
                     <td>{{$comment->email}}</td>
                     <td>{{ str_limit($comment->body, 100, '...') }}</td>
                     <td><a class="btn btn-primary" href="{{route('home.post',$comment->post->slug)}}" data-toggle="tooltip" title="View Post"><i class="fa fa-eye"></i></a></td>
-                    <td><a class="btn btn-default" href="{{route('admin.comment.replies.show',$comment->id)}}" data-toggle="tooltip" title="View Replies"><i class="fa fa-comment"></i></a></td>
+                    <td><a class="btn btn-default" href="{{route('admin.replies.show',$comment->id)}}" data-toggle="tooltip" title="View Replies"><i class="fa fa-comment"></i></a></td>
                     <td>
                         @if($comment->is_active == 1)
                         {!! Form::open(['method'=>'PATCH','action'=>['PostCommentsController@update', $comment->id]]) !!}

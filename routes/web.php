@@ -11,14 +11,14 @@
 |
 */
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::auth();
+Route::get('/logout', 'Auth\LoginController@logout');
+
 
 Route::get('/home', 'HomeController@index');
 Route::get('/post/{id}', [
@@ -28,21 +28,20 @@ Route::get('/post/{id}', [
 
 
 
-Route::group(['middleware'=>'admin'], function(){
-
+Route::group(['middleware'=>'admin','as'=>'admin.'], function(){
+    Route::get('/admin',['as'=>'index', function (){
+        return view('admin.index');
+    }]);
     Route::resource('/admin/users', 'AdminUsersController');
     Route::resource('/admin/posts', 'AdminPostsController');
     Route::resource('/admin/categories', 'AdminCategoriesController');
     Route::get('/admin/media/upload',[
-        'as'=>'admin.media.upload',
+        'as'=>'media.upload',
         'uses'=>'AdminMediasController@upload'
     ]);
     Route::resource('/admin/media', 'AdminMediasController');
-
-    Route::get('/admin',['as'=>'admin.index', function (){
-        return view('admin.index');
-    }]);
     Route::resource('/admin/comments', 'PostCommentsController');
+
     Route::resource('/admin/comment/replies', 'CommentRepliesController');
 });
 
