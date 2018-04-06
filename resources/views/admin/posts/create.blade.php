@@ -1,9 +1,11 @@
 @extends('layouts.admin')
+
 @section('pageheader')
     Create Post
 @endsection
 @section('content')
 @include('includes.form_error')
+@include('includes.tinyeditor')
     {!! Form::open(['method'=>'POST','action'=>'AdminPostsController@store', 'files'=>true]) !!}
         <div class="form-group">
             {!! Form::label('title', 'Title:' )!!}

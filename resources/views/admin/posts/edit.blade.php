@@ -4,6 +4,7 @@
 @endsection
 @section('content')
     @include('includes.form_error')
+    @include('includes.tinyeditor')
 
     <div class="col-sm-3">
         <img src="{{$post->photo->file}}" alt="" class="img-responsive">
