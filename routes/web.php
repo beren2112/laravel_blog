@@ -39,7 +39,12 @@ Route::group(['middleware'=>'admin','as'=>'admin.'], function(){
         'as'=>'media.upload',
         'uses'=>'AdminMediasController@upload'
     ]);
+    Route::delete('/admin/delete/media',[
+        'as'=>'media.delete',
+        'uses'=>'AdminMediasController@deleteMedia'
+    ]);
     Route::resource('/admin/media', 'AdminMediasController');
+
     Route::resource('/admin/comments', 'PostCommentsController');
 
     Route::resource('/admin/comment/replies', 'CommentRepliesController');
