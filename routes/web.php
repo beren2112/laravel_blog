@@ -12,26 +12,24 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::auth();
-Route::get('/logout', 'Auth\LoginController@logout');
-
-
-Route::get('/home', 'HomeController@index');
+Route::get('/', [
+    'as'=>'front.home',
+    'uses'=>'HomeController@index'
+]);
 Route::get('/post/{id}', [
     'as'=>'home.post',
-    'uses'=>'AdminPostsController@post'
+    'uses'=>'HomeController@post'
 ]);
-
+Route::auth();
+Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/home', 'HomeController@index');
 
 
 Route::group(['middleware'=>'admin','as'=>'admin.'], function(){
-    Route::get('/admin',['as'=>'index', function (){
-        return view('admin.index');
-    }]);
+    Route::get('/admin',[
+        'as'=>'index',
+        'uses'=>'AdminController@index'
+    ]);
     Route::resource('/admin/users', 'AdminUsersController');
     Route::resource('/admin/posts', 'AdminPostsController');
     Route::resource('/admin/categories', 'AdminCategoriesController');

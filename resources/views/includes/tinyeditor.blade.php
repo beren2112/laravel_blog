@@ -1,7 +1,7 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>
     var editor_config = {
-        path_absolute : "/codehacking/public/",
+        path_absolute : "/",
         selector: "textarea",
         plugins: [
             "advlist autolink lists link image charmap print preview hr anchor pagebreak",

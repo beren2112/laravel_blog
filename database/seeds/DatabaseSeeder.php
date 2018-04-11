@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
         DB::table('comments')->truncate();
         DB::table('comment_replies')->truncate();
         $this->call(UsersTableSeeder::class);
-        factory(App\User::class,10)->create()->each(function($user){
+        factory(App\User::class,25)->create()->each(function($user){
            $user->posts()->save(factory(App\Post::class)->make());
         });
         factory(App\Role::class, 3)->create();
         factory(App\Category::class, 10)->create();
         factory(App\Photo::class, 1)->create();
-        factory(App\Comment::class, 10)->create()->each(function ($c) {
+        factory(App\Comment::class, 50)->create()->each(function ($c) {
             $c->replies()->save(factory(App\CommentReply::class)->make());
         });
     }
